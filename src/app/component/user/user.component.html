@@ -1,20 +1,21 @@
-<div class="user-content">
-    <h1 class="page-title" >My Todos</h1>
+<div class="Add-Customer">
+    <h1 class="page-title" >My Customers</h1>
     <div class="user-create" >
-      <form #todo="ngForm" (ngSubmit)="addUser(user.value); " novalidate>
-        <input type="text" id="title" class="form-control" placeholder="Please add a customer here...." 
+      <form #todo="ngForm" (ngSubmit)="addUser(todo.value); " novalidate>
+        <input type="text" id="title" class="form-control" placeholder="Add a Customer and Press Enter" 
                required
-               name="Name" [(ngModel)]="newUser.name"
+               name="title" [(ngModel)]="newUser.name"
                #title="ngModel">
-            <div *ngIf="name.errors && name.dirty"
+               <input type="text" id="title" class="form-control" placeholder="Add Customers Address and Press Enter" 
+               required
+               name="title" [(ngModel)]="newUser.address"
+               #title="ngModel">
+            <div *ngIf="title.errors && title.dirty"
                class="alert alert-danger">
-            <div [hidden]="!name.errors.required">
-              Name is required.
+            <div [hidden]="!title.errors.required">
+              Title is required.
             </div>
           </div>
         <button type="submit">Add</button>
       </form>
     </div>
-    
-    
-</div> 

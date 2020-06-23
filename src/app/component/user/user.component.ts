@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/service/user.service';
 import { User } from 'src/app/model/user';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-user',
@@ -9,18 +10,14 @@ import { User } from 'src/app/model/user';
 })
 export class UserComponent implements OnInit {
 
-   users: User[];
+   users: User[]= [];
    newUser: User = new User();
    editingUser: User = new User();
    editing: boolean;
 
-
-
   constructor(public apiService: UserService) { }
-
   ngOnInit(): void {
   }
-
   //get
   getUser():void 
   {
@@ -30,39 +27,33 @@ export class UserComponent implements OnInit {
       }
     )
   }
-
   //post
-  addUser(Name: string): void
+  addUser(Name:NgForm): void
   {
     this.apiService.addUser(this.newUser).subscribe(
       (data) => {
         console.log(data);
-        this.newUser.Name = Name;
+        this.newUser.name = data.name;
+        this.getUser();
 
       }
     )
     this.newUser = new User();
   }
-
-
-
-
   //put
-  updateTodo(id,user:User):void{
+  updateUser(id,user:User):void{
     console.log(user);
     this.apiService.updateUser(user.id,this.editingUser)
     .subscribe((data)=>{
-      let existingTodo = this.users.find(todo => todo.id === data.id);
+      let existingUser = this.users.find(user => user.id === data.id);
       // existingTodo = data;
-      existingTodo.Name = user.Name;
-      this.editingUser = existingTodo;
+      existingUser.name = data.name;
+      this.editingUser = existingUser
       
     });
     this.editingUser = new User();
   }
-
   //delete
-
   deleteUser(id): void
   {
    this.apiService.deleteUser(id).subscribe((data) => {

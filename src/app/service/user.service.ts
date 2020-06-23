@@ -21,20 +21,20 @@ export class UserService {
 
   getUser():Observable<User[]> 
   {
-    return this.http.get<User[]>(baseUrl + "/User", httpOptions);
+    return this.http.get<User[]>(baseUrl + "/user", httpOptions);
     
   }
   
   addUser(user: User):Observable<User>
   {
-    return this.http.post<User>(baseUrl + "/User",JSON.stringify(user), httpOptions);
+    return this.http.post<User>(baseUrl + "/user",JSON.stringify(user), httpOptions);
   }
 
   deleteUser(id: Number) {
-      return this.http.delete<User>(baseUrl + "/User/" + id,httpOptions);
+      return this.http.delete<User>(baseUrl + "/user/" + id,httpOptions);
   }
 
   updateUser(id, user:User): Observable<User> {
-    return this.http.put<User>(baseUrl + "/todo/" + id, JSON.stringify(user), httpOptions);
+    return this.http.put<User>(baseUrl + "/user/" + id, JSON.stringify(user), httpOptions);
   }
 }
